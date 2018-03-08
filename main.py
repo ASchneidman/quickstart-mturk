@@ -1,14 +1,15 @@
 import os
 from flask import Flask, render_template, url_for, request, make_response
-from boto.mturk.connection import MTurkConnection
-from boto.mturk.question import ExternalQuestion
-from boto.mturk.qualification import Qualifications, PercentAssignmentsApprovedRequirement, NumberHitsApprovedRequirement
-from boto.mturk.price import Price
+import boto3
+#from boto3.mturk.connection import MTurkConnection
+#from boto3.mturk.question import ExternalQuestion
+#from boto3.mturk.qualification import Qualifications, PercentAssignmentsApprovedRequirement, NumberHitsApprovedRequirement
+#from boto3.mturk.price import Price
 
 
 #Start Configuration Variables
-AWS_ACCESS_KEY_ID = "XXX"
-AWS_SECRET_ACCESS_KEY = "XXX"
+AWS_ACCESS_KEY_ID = "AKIAI5TLYK4TESBGUU4A"
+AWS_SECRET_ACCESS_KEY = "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"
 DEV_ENVIROMENT_BOOLEAN = True
 DEBUG = True
 #End Configuration Variables
@@ -49,8 +50,8 @@ def main():
     }
 
 
-    resp = make_response(render_template("page.html", name = render_data))
-    
+    resp = make_response(render_template("page.html", name = render_data, youtubeid = "-JPOoFkrh94"))
+
     #This is particularly nasty gotcha.
     #Without this header, your iFrame will not render in Amazon
     resp.headers['x-frame-options'] = 'this_can_be_anything'
@@ -59,4 +60,4 @@ def main():
 
 if __name__ == "__main__":
     app.debug = DEBUG
-    app.run() 
+    app.run()
