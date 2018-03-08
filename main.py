@@ -9,8 +9,8 @@ import boto3
 
 
 #Start Configuration Variables
-AWS_ACCESS_KEY_ID = "AKIAJKQRSV7F2Z76QCTQ"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = ""
+AWS_SECRET_ACCESS_KEY = ""
 DEV_ENVIROMENT_BOOLEAN = True
 DEBUG = True
 #End Configuration Variables
