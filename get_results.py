@@ -6,8 +6,8 @@ def get_res(hit_id):
     MTURK_SANDBOX = 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
     MTURK_PROD = 'https://mturk-requester.us-east-1.amazonaws.com'
     mturk = boto3.client('mturk',
-        aws_access_key_id = "AKIAI5TLYK4TESBGUU4A",
-        aws_secret_access_key = "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",
+        aws_access_key_id = "",
+        aws_secret_access_key = "",
         region_name = 'us-east-1',
         endpoint_url = MTURK_SANDBOX,
     )
