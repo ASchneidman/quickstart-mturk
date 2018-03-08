@@ -1,7 +1,5 @@
-boto3==1.6.3
-Flask==0.12.2
-boto==2.48.0
-setup==1.0
+boto==2.38.0
+Flask==0.10.1
 gunicorn==19.4.5
 itsdangerous==0.24
 Jinja2==2.8
