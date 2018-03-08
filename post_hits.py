@@ -8,8 +8,8 @@ import boto3
 #from boto.mturk.price import Price
 
 #Start Configuration Variables
-AWS_ACCESS_KEY_ID = "AKIAI5TLYK4TESBGUU4A"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = ""
+AWS_SECRET_ACCESS_KEY = ""
 DEV_ENVIROMENT_BOOLEAN = True
 DEBUG = True
 #End Configuration Variables
