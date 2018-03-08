@@ -1,5 +1,6 @@
 import boto3
 import time
+import sys
 
 def get_res(hit_id):
     MTURK_SANDBOX = 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
@@ -8,7 +9,7 @@ def get_res(hit_id):
         aws_access_key_id = "AKIAI5TLYK4TESBGUU4A",
         aws_secret_access_key = "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",
         region_name = 'us-east-1',
-        endpoint_url = MTURK_PROD,
+        endpoint_url = MTURK_SANDBOX,
     )
 
     # You will need the following library
@@ -16,7 +17,6 @@ def get_res(hit_id):
     # Install it in your local environment with
     # pip install xmltodict
     import xmltodict
-
     # Use the hit_id previously created
     #hit_id = '306W7JMRYZ47I0WXQL8LU7LRI3AB8A'
     # We are only publishing this task to one Worker
@@ -44,3 +44,8 @@ def get_res(hit_id):
              print ("Submitted answer: " + xml_doc['QuestionFormAnswers']['Answer']['FreeText'])
     else:
        print ("No results ready yet")
+
+if __name__ == "__main__":
+    input = sys.argv[1]
+    id = str(input)
+    get_res(id)
