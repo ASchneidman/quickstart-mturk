@@ -1,5 +1,6 @@
 import boto3
 import time
+import os
 from dotenv import load_dotenv
 import sys
 
