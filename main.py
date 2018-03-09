@@ -1,16 +1,20 @@
 import os
 from flask import Flask, render_template, url_for, request, make_response
 import boto3
-#from boto3.mturk.connection import MTurkConnection
+from dotenv import load_dotenv
+#from boto.mturk.connection import MTurkConnection
 #from boto3.mturk.question import ExternalQuestion
 #from boto3.mturk.qualification import Qualifications, PercentAssignmentsApprovedRequirement, NumberHitsApprovedRequirement
 #from boto3.mturk.price import Price
 
-
+# load dotenv in the base root
+APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to application_top
+dotenv_path = os.path.join(APP_ROOT, '.env')
+load_dotenv(dotenv_path)
 
 #Start Configuration Variables
-AWS_ACCESS_KEY_ID = ""
-AWS_SECRET_ACCESS_KEY = ""
+AWS_ACCESS_KEY_ID = os.getenv('KEY')
+AWS_SECRET_ACCESS_KEY = os.getenv('SECRET_KEY')
 DEV_ENVIROMENT_BOOLEAN = True
 DEBUG = True
 #End Configuration Variables

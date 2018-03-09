@@ -1,13 +1,23 @@
 import boto3
 import time
+from dotenv import load_dotenv
 import sys
 
 def get_res(hit_id):
+    # load dotenv in the base root
+    APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to application_top
+    dotenv_path = os.path.join(APP_ROOT, '.env')
+    load_dotenv(dotenv_path)
+
+    #Start Configuration Variables
+    AWS_ACCESS_KEY_ID = os.getenv('KEY')
+    AWS_SECRET_ACCESS_KEY = os.getenv('SECRET_KEY')
+
     MTURK_SANDBOX = 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
     MTURK_PROD = 'https://mturk-requester.us-east-1.amazonaws.com'
     mturk = boto3.client('mturk',
-        aws_access_key_id = "",
-        aws_secret_access_key = "",
+        aws_access_key_id = AWS_ACCESS_KEY_ID,
+        aws_secret_access_key = AWS_SECRET_ACCESS_KEY,
         region_name = 'us-east-1',
         endpoint_url = MTURK_SANDBOX,
     )
