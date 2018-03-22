@@ -48,11 +48,11 @@ def main():
         "assignment_id": request.args.get("assignmentId"),
         "amazon_host": AMAZON_HOST,
         "hit_id": request.args.get("hitId"),
-        "some_info_to_pass": request.args.get("someInfoToPass")
+        "youtube_id": request.args.get("video"),
     }
 
 
-    resp = make_response(render_template("page.html", name = render_data, youtubeid = request.args.get("video")))
+    resp = make_response(render_template("page.html", name = render_data))
 
     #This is particularly nasty gotcha.
     #Without this header, your iFrame will not render in Amazon

@@ -51,7 +51,7 @@
           -->
 
             <div class="col s6">
-              <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/{{  youtubeid  }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/{{  name.youtubeid  }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
             <!-- DEFAULT EXAMPLE DIALOGUE
             <div class='row'>
@@ -95,6 +95,7 @@
                 <input type="hidden" id="assignmentId" value="{{ name.assignment_id }}" name="assignmentId" />
                 <input type="hidden" id="workerId" value="{{ name.worker_id }}" name="workerId" />
                 <input type="hidden" id="hitId" value="{{ name.hit_id }}" name="hitId" />
+                <input type="hidden" id="youtubeId" value="{{ name.youtubeid }}" name="youtubeId"/>
               </form>
               <div class="modal-footer">
                 <a id="finalSubmit" class="waves-effect waves-green btn-flat">Submit</a>
