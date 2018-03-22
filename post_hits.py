@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import psycopg2
 import secrets
 import xml.etree.cElementTree as ET
+import sys
 
 from oauth2client.tools import argparser
 
@@ -45,7 +46,10 @@ except psycopg2.OperationalError as e:
         sys.exit(1)
 cur = conn.cursor()
 conn.autocommit = True
-cur.execute("SELECT video_id FROM youtube_data LIMIT 10;")
+num_grab = "10"
+if (len(sys.argv) > 1):
+    num_grab = sys.argv[1]
+cur.execute("SELECT video_id FROM youtube_data LIMIT " + num_grab + ";")
 ids = [e[0] for e in cur.fetchall()]
 
 #5 cents per HIT
