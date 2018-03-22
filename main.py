@@ -2,10 +2,7 @@ import os
 from flask import Flask, render_template, url_for, request, make_response
 import boto3
 from dotenv import load_dotenv
-#from boto.mturk.connection import MTurkConnection
-#from boto3.mturk.question import ExternalQuestion
-#from boto3.mturk.qualification import Qualifications, PercentAssignmentsApprovedRequirement, NumberHitsApprovedRequirement
-#from boto3.mturk.price import Price
+
 
 # load dotenv in the base root
 APP_ROOT = os.path.join(os.path.dirname(__file__), '')   # refers to application_top
@@ -52,6 +49,7 @@ def main():
         "amazon_host": AMAZON_HOST,
         "hit_id": request.args.get("hitId"),
         "some_info_to_pass": request.args.get("someInfoToPass")
+        "youtubeid": request.args.get("video")
     }
 
 
