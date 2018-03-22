@@ -53,7 +53,7 @@ def main():
     }
 
 
-    resp = make_response(render_template("page.html", name = render_data, youtubeid = "-JPOoFkrh94"))
+    resp = make_response(render_template("page.html", name = render_data))
 
     #This is particularly nasty gotcha.
     #Without this header, your iFrame will not render in Amazon
