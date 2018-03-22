@@ -3,6 +3,8 @@ import time
 import os
 from dotenv import load_dotenv
 import sys
+import secrets
+import psycopg2
 
 
 def get_res(hit_id):
@@ -24,6 +26,17 @@ def get_res(hit_id):
                          region_name='us-east-1',
                          endpoint_url=MTURK_SANDBOX,
                          )
+    conn = None
+    try:
+        conn = psycopg2.connect(
+                dbname="sqa_data",
+                user="sqa_downloader",
+                host="localhost",
+                password=secrets.DB_PW)
+    except psycopg2.OperationalError as e:
+            print('Unable to connect!\n{0}').format(e)
+            sys.exit(1)
+    cur = conn.cursor()
 
     # You will need the following library
     # to help parse the XML answers supplied from MTurk
@@ -48,24 +61,49 @@ def get_res(hit_id):
         for assignment in worker_results['Assignments']:
             xml_doc = xmltodict.parse(assignment['Answer'])
 
+            userInput = ""
+            videoId = ""
+
             print("Worker's answer was:")
             if type(xml_doc['QuestionFormAnswers']['Answer']) is list:
                 # Multiple fields in HIT layout
+
                 for answer_field in xml_doc['QuestionFormAnswers']['Answer']:
                     print("For input field: " +
                           answer_field['QuestionIdentifier'])
                     print("Submitted answer: " + answer_field['FreeText'])
+                    if (answer_field['QuestionIdentifier'] == "user-input"):
+                        userInput = answer_field['FreeText']
+                    if (answer_field['QuestionIdentifier'] == "youtubeId"):
+                        videoId = answer_field['FreeText']
+
             else:
                 # One field found in HIT layout
                 print("For input field: " +
                       xml_doc['QuestionFormAnswers']['Answer']['QuestionIdentifier'])
                 print("Submitted answer: " +
                       xml_doc['QuestionFormAnswers']['Answer']['FreeText'])
+                if (answer_field['QuestionIdentifier'] == "user-input"):
+                    userInput = answer_field['FreeText']
+                if (answer_field['QuestionIdentifier'] == "youtubeId"):
+                    videoId = answer_field['FreeText']
+            #Send data to postgres server
+            query = """UPDATE youtube_data SET mturk_transcription = %s WHERE video_id = %s;"""
+
+            try:
+                cur.execute(query, (userInput, videoId))
+                print("Updated rows: " + str(cur.rowcount))
+                conn.commit()
+                cur.close()
+                conn.close()
+            except psycopg2.IntegrityError:
+                print ("Something went wrong")
     else:
         print("No results ready yet")
 
 
 if __name__ == "__main__":
+
     input = sys.argv[1]
     id = str(input)
     get_res(id)
