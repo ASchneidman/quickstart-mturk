@@ -19,7 +19,7 @@ DEBUG = True
 #This allows us to specify whether we are pushing to the sandbox or live site.
 if DEV_ENVIROMENT_BOOLEAN:
     AMAZON_HOST = "https://workersandbox.mturk.com/mturk/externalSubmit"
-elset
+else
     AMAZON_HOST = "https://www.mturk.com/mturk/externalSubmit"
 
 app = Flask(__name__, static_url_path='')
@@ -49,11 +49,10 @@ def main():
         "amazon_host": AMAZON_HOST,
         "hit_id": request.args.get("hitId"),
         "some_info_to_pass": request.args.get("someInfoToPass")
-        "youtubeid": request.args.get("video")
     }
 
 
-    resp = make_response(render_template("page.html", name = render_data))
+    resp = make_response(render_template("page.html", name = render_data, youtubeid = request.args.get("video")))
 
     #This is particularly nasty gotcha.
     #Without this header, your iFrame will not render in Amazon
